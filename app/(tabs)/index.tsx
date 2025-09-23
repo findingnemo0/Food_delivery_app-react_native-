@@ -5,11 +5,17 @@ import { FlatList, Image, Pressable, Text, TouchableOpacity, View } from "react-
 import { SafeAreaView } from "react-native-safe-area-context";
 import "../global.css";
 import CartButton from "../../components/CartButton";
+import useAuthStore from "@/store/auth.store";
 
 export default function Index() {
+
+  // these 2 line are for printing and checking who is currently logged in
+  const {user} =useAuthStore();
+  // console.log("USER", JSON.stringify(user,null ,2));
+ // ..
+
   return (
     <SafeAreaView className="flex-1 bg-white">
-
       <FlatList
         data={offers} 
         renderItem={({item, index})=>{
