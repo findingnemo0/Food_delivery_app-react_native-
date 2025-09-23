@@ -24,7 +24,7 @@ const SignUp = () => {
           name,
         })
 
-        router.replace("/");
+        router.replace("/(tabs)");
       } catch(error:any){
         Alert.alert('Error',error.message);
       }finally{

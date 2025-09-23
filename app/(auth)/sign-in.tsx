@@ -20,7 +20,7 @@ const SignIn = () => {
         
         await SignInUser({email, password});
 
-        router.replace("/");
+        router.replace("/(tabs)");
         } catch(error:any){
           Alert.alert('Error',error.message);
         }finally{
