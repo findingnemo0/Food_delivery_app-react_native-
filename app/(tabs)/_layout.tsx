@@ -28,9 +28,9 @@ export default function TabLayout() {
     if(!isAuthenticated)return <Redirect href="/sign-in"/>
 
   return (<Tabs
-          screenOptions={(
-            headerShow:false,
-            tabBarShownLabel:false,
+          screenOptions={{
+            headerShown:false,
+            tabBarShowLabel:false,
             tabBarStyle:{
               borderTopLeftRadius:50,
               borderTopRightRadius:50,
@@ -47,34 +47,34 @@ export default function TabLayout() {
               shadowRadius:4,
               elevation:5,
             }
-          )}
+          }}
           >
     <Tabs.Screen
         name='index'
         options={{
           title:'Home',
-          tabBarIcon:({focused}) => <TabBarIcon title="Home" icon={images.home} />
+          tabBarIcon:({focused}) => <TabBarIcon focused={focused} title="Home" icon={images.home} />
         }}
         />
     <Tabs.Screen
         name='search'
         options={{
           title:'Search',
-          tabBarIcon:({focused}) => <TabBarIcon title="Search" icon={images.search} />
+          tabBarIcon:({focused}) => <TabBarIcon focused={focused} title="Search" icon={images.search} />
         }}
         />
     <Tabs.Screen
         name='cart'
         options={{
           title:'Cart',
-          tabBarIcon:({focused}) => <TabBarIcon title="Cart" icon={images.bag} />
+          tabBarIcon:({focused}) => <TabBarIcon focused={focused} title="Cart" icon={images.bag} />
         }}
         />
     <Tabs.Screen
         name='profile'
         options={{
           title:'Profile',
-          tabBarIcon:({focused}) => <TabBarIcon title="Profile" icon={images.person} />
+          tabBarIcon:({focused}) => <TabBarIcon focused={focused} title="Profile" icon={images.person} />
         }}
         />
   </Tabs>)
