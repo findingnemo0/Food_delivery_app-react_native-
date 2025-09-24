@@ -83,16 +83,30 @@ export const getCurrentuser = async (): Promise<User | null> => {
 
 export const getMenu = async({category, query}:GetMenuParams) =>{
   try{
-    const quries: string[] = [];
-    if (category) quries.push(...items:Query.equal('categories',category));
-    if (query) quries.push(...items:Query.search('name',query));
+    const queries: string[] = [];
+
+    if (category) queries.push(Query.equal('categories',category));
+    if (query) queries.push(Query.search('name',query));
 
     const menus =await databases.listDocuments(
-      databaseId:appwriteConfig.databaseId,
-      collectioId:appwriteConfig.menuCollectionId,
-      queries:queries,
-    )
+      appwriteConfig.databaseId,
+      appwriteConfig.menuCollectionId,
+      queries,
+    );
+
     return menus.documents;
+  } catch (e){
+    throw new Error (e as string);
+  }
+};
+
+
+export const getCategories = async() =>{
+  try{
+    const categories = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.categoriesCollectionId,
+    )
   } catch (e){
     throw new Error (e as string);
   }
