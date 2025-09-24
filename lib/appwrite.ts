@@ -2,11 +2,12 @@ import { Account, Avatars, Client, Databases, ID, Query ,Storage } from "react-n
 import { CreateUserPrams , SignInParams } from "@/type";
 import SignIn from "@/app/(auth)/sign-in";
 import { User } from "@/type";
+import { GetMenuParams } from "@/type";
 
 
 export const appwriteConfig ={
     endpoint: process.env.EXPO_PUBLIC_APPWRITE_ENDPOINT,
-    projectId: process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID,
+    projectId: process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID ,
     platform: "com.echo.foodordering",
     databaseId: "68cfdaf1002dd88823c9",
     bucketId : "68d3e6aa000256118586",
@@ -21,7 +22,7 @@ export const client = new Client();
 client
     .setEndpoint(appwriteConfig.endpoint!)
     .setProject(appwriteConfig.projectId!)
-    .setPlatform(appwriteConfig.platform!)
+    // .setPlatform(appwriteConfig.platform!)
 
 export const account = new Account(client);
 export const databases = new Databases(client);
@@ -78,3 +79,21 @@ export const getCurrentuser = async (): Promise<User | null> => {
     return null;
   }
 };
+
+
+export const getMenu = async({category, query}:GetMenuParams) =>{
+  try{
+    const quries: string[] = [];
+    if (category) quries.push(...items:Query.equal('categories',category));
+    if (query) quries.push(...items:Query.search('name',query));
+
+    const menus =await databases.listDocuments(
+      databaseId:appwriteConfig.databaseId,
+      collectioId:appwriteConfig.menuCollectionId,
+      queries:queries,
+    )
+    return menus.documents;
+  } catch (e){
+    throw new Error (e as string);
+  }
+}

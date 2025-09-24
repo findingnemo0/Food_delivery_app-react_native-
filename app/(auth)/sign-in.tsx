@@ -28,7 +28,7 @@ const SignIn = () => {
         }finally{
           setIsSubmitting(false);
         }
-    }
+    };
 
   return (
     <View className='gap-10 bg-white rounded-lg p-5 mt-5'>
