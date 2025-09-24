@@ -4,11 +4,13 @@ import { createUser } from '@/lib/appwrite';
 import { Link, router } from 'expo-router';
 import React, { useState } from 'react';
 import { Alert, Text, View } from 'react-native';
+import useAuthStore from '@/store/auth.store';
 
 
 const SignUp = () => {
   const[isSubmitting, setIsSubmitting]= useState(false);
   const[form, setForm] = useState({name:' ', email:'',password:''});
+  const {fetchAuthenticatedUser} =useAuthStore();
 
   const sumit = async()=>{
 
@@ -23,7 +25,7 @@ const SignUp = () => {
           password,
           name,
         })
-
+        await fetchAuthenticatedUser();
         router.replace("/(tabs)");
       } catch(error:any){
         Alert.alert('Error',error.message);

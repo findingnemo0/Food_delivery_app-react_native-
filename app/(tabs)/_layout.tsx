@@ -23,19 +23,20 @@ const TabBarIcon =({focused, icon , title}: TabBarIconProps) =>(
 
 
 export default function TabLayout() {
-    const {isAuthenticated} = useAuthStore();
+    const {isAuthenticated, isLoading} = useAuthStore();
 
-    if(!isAuthenticated)return <Redirect href="/sign-in"/>
+    if(!isAuthenticated)return null;
+    if(!isLoading) return <Redirect href="/sign-in"/>
 
   return (<Tabs
           screenOptions={{
             headerShown:false,
             tabBarShowLabel:false,
             tabBarStyle:{
-              borderTopLeftRadius:50,
-              borderTopRightRadius:50,
-              borderBottomLeftRadius:50,
-              borderBottomRightRadius:50,
+              borderTopLeftRadius:60,
+              borderTopRightRadius:60,
+              borderBottomLeftRadius:60,
+              borderBottomRightRadius:60,
               marginHorizontal:20,
               height:80,
               position:'absolute',

@@ -25,7 +25,7 @@ export default function RootLayout() {
    },[fontsLoaded,error]);
 
    useEffect(()=>{
-    fetchAuthenticatedUser()
+    fetchAuthenticatedUser();
    },[fetchAuthenticatedUser]);
 
    if(!fontsLoaded || isLoading) return null;

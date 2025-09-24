@@ -1,4 +1,4 @@
-import { Account, Avatars, Client, Databases, ID, Query } from "react-native-appwrite";
+import { Account, Avatars, Client, Databases, ID, Query ,Storage } from "react-native-appwrite";
 import { CreateUserPrams , SignInParams } from "@/type";
 import SignIn from "@/app/(auth)/sign-in";
 import { User } from "@/type";
@@ -9,7 +9,12 @@ export const appwriteConfig ={
     projectId: process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID,
     platform: "com.echo.foodordering",
     databaseId: "68cfdaf1002dd88823c9",
+    bucketId : "68d3e6aa000256118586",
     userCollecionId: "user",
+    categoriesCollectionId: 'categories',
+    menuCollectionId: 'menu',
+    customizationsCollectionId: 'customizations',
+    menuCustomizationCollectionId: 'menu_customizations',
 };
 
 export const client = new Client();
@@ -20,12 +25,13 @@ client
 
 export const account = new Account(client);
 export const databases = new Databases(client);
+export const storage = new Storage(client);
 const avatars = new Avatars(client);
 
 export const createUser = async({email, password ,name}: CreateUserPrams) =>{
     try{
          const newAccount = await account.create(ID.unique(), email, password , name);
-         if(!newAccount) throw Error;
+         if(!newAccount) throw Error("failed to create account");
 
          await SignInUser({email, password});
 
