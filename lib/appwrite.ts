@@ -107,6 +107,7 @@ export const getCategories = async() =>{
       appwriteConfig.databaseId,
       appwriteConfig.categoriesCollectionId,
     )
+    return categories.documents;
   } catch (e){
     throw new Error (e as string);
   }
